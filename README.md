@@ -22,12 +22,19 @@ Monorepo Layout
 ---------------
 
 /zkvm → Core zk virtual machine
+
 /guest → WASM-based guest logic
+
 /host → Host runtime and interface
+
 /executor → Off-chain executor logic
+
 /verifier-contract → Solana smart contract (Anchor)
+
 /frontend-dashboard → Live execution dashboard (React)
+
 /docs → Technical documentation
+
 /consus_full_stack → Composable stack with orchestration
 
 

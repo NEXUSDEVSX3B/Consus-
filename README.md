@@ -1,46 +1,45 @@
-CONSUS is a pseudo-layer of execution for Solana, leveraging zero-knowledge proofs to offload heavy computations off-chain while preserving trustless on-chain verification.
-Its goal is to reduce network congestion by shifting intensive logic outside the base layer and validating it with zk-based cryptographic guarantees.
+CONSUS – Off-chain zk Execution Layer for Solana
+=================================================
 
-Architecture
+CONSUS is a modular execution layer designed to scale Solana by offloading computationally intensive logic off-chain. Using zero-knowledge proofs, CONSUS preserves on-chain trust while shifting workloads away from the base layer—reducing congestion and increasing throughput without compromising security.
 
-CONSUS is composed of several independent modules, forming a modular zk-execution stack:
+Core Concept
+------------
 
-Verifier Contract – Anchor-based smart contract deployed on Solana to validate zk proofs.
+CONSUS executes logic off-chain, generates cryptographic zk-proofs, and submits them to an on-chain verifier contract. This allows for efficient computation without re-execution on Solana, maintaining trustless validation.
 
-zkVM Core – Executes WASM guest programs and produces verifiable proof transcripts.
+System Architecture
+-------------------
 
-Host/Guest Runtime – WASI-compatible execution contexts for flexible deployments.
+- zkVM Core: Executes WASM guest programs and generates verifiable proof transcripts  
+- Verifier Contract (Anchor): Validates zk proofs on Solana without re-running logic  
+- Host/Guest Runtimes: WASI-compatible environments to handle modular execution flows  
+- Executor: Custom off-chain orchestrator that manages runtime state and proof flow  
+- Orchestrator (in development): REST-based controller powered by LLMs for dynamic coordination, fault recovery, and adaptive logic routing  
+- Frontend Dashboard: React-based UI for real-time execution monitoring and debugging
 
-Custom Executor – Manages off-chain logic, memory, and proof orchestration.
+Monorepo Layout
+---------------
 
-Frontend Dashboard – React interface for real-time visualization of the system’s state.
+/zkvm → Core zk virtual machine
+/guest → WASM-based guest logic
+/host → Host runtime and interface
+/executor → Off-chain executor logic
+/verifier-contract → Solana smart contract (Anchor)
+/frontend-dashboard → Live execution dashboard (React)
+/docs → Technical documentation
+/consus_full_stack → Composable stack with orchestration
 
-Orchestrator (WIP) – REST-based AI module for coordination, fault recovery, and adaptive logic.
 
-Development Stage
+Development Status
+------------------
 
-Proof circuits and smart contracts are operational and fully testable in local environments.
-
-zkVM handles WASM workloads and outputs valid proofs.
-
-Verifier contract integrates with Solana for on-chain validation.
-
-Orchestrator is in progress and will introduce LLM-based logic routing and AI conflict resolution.
-
-Repo Structure
-
-The monorepo contains fully decoupled folders:
-
-zkvm
-guest
-host
-executor
-verifier-contract
-frontend-dashboard
-docs
-consus_full_stack
+- Proof circuits and smart contracts are fully operational in local environments  
+- zkVM proof outputs are verifiable on-chain via the verifier contract  
+- AI-based orchestration is in active development, targeting automated fault handling and coordination
 
 License
+-------
 
-CONSUS is released under the MIT License.
-Built for developers rethinking execution, integrity, scalability, and zk-applications within high-performance chains like Solana.
+CONSUS is open-sourced under the MIT License.  
+It’s built for researchers, developers, and builders rethinking execution integrity, scalability, and zk-powered logic across high-performance blockchains.

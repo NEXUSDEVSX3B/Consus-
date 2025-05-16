@@ -1,0 +1,9 @@
+[programs.localnet]
+consus_verifier = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkgc3QfZ6sE7Z"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test-bpf"
